@@ -87,24 +87,22 @@ int main() {
     setMotorSpeed(motorB1, motorB2, 1);  // 电机B正转
     std::this_thread::sleep_for(std::chrono::seconds(2));
 
-//    // 控制小车后退
-//    setMotorSpeed(motorA1, motorA2, -1); // 电机A反转
-//    setMotorSpeed(motorB1, motorB2, -1); // 电机B反转
-//    std::this_thread::sleep_for(std::chrono::seconds(2));
-//
-//    // 控制小车停止
-//    setMotorSpeed(motorA1, motorA2, 0);  // 电机A停止
-//    setMotorSpeed(motorB1, motorB2, 0);  // 电机B停止
-//
-//    // 控制舵机角度
-//    setServoAngle(90);  // 舵机转到90度
-//    std::this_thread::sleep_for(std::chrono::seconds(1));
-//    setServoAngle(0);   // 舵机转到0度
-//    std::this_thread::sleep_for(std::chrono::seconds(1));
-//    setServoAngle(180); // 舵机转到180度
-//    std::this_thread::sleep_for(std::chrono::seconds(1));
+    // 控制小车后退
+    setMotorSpeed(motorA1, motorA2, -1); // 电机A反转
+    setMotorSpeed(motorB1, motorB2, -1); // 电机B反转
+    std::this_thread::sleep_for(std::chrono::seconds(2));
 
-    sleep(60);
+    // 控制小车停止
+    setMotorSpeed(motorA1, motorA2, 0);  // 电机A停止
+    setMotorSpeed(motorB1, motorB2, 0);  // 电机B停止
+
+    // 控制舵机角度
+    setServoAngle(90);  // 舵机转到90度
+    std::this_thread::sleep_for(std::chrono::seconds(1));
+    setServoAngle(0);   // 舵机转到0度
+    std::this_thread::sleep_for(std::chrono::seconds(1));
+    setServoAngle(180); // 舵机转到180度
+    std::this_thread::sleep_for(std::chrono::seconds(1));
 
     cleanup();
     return 0;
