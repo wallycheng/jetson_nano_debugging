@@ -1,4 +1,4 @@
-rdware Debug Log: Motor Driver & Power Supply Issues
+Hrdware Debug Log: Motor Driver & Power Supply Issues
 
 ## Issue 1: SY8205 Voltage Drop
 - **Description**:  
