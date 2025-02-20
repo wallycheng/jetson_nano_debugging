@@ -1,7 +1,7 @@
 # this is a debugging blog of jetson nano
 
 Hardware Debug Log: Motor Driver & Power Supply Issues
-Issue 1: SY8205 Voltage Drop
+  Issue 1: SY8205 Voltage Drop
 * Four 1.3V batteries in series output 5.25V, but the voltage drops to 4.7V after passing through the SY8205 buck converter.
 * Hypothesis: Potential manufacturing defect in the SY8205 module.
 * Action: Proceeded with testing despite risks to the PCB (voltage instability might damage components).
@@ -12,12 +12,12 @@ Issue 2: Jetson Nano GPIO & L7110S Motor Driver
     * Expected: MOTORB should drive wheels.
     * Observed: MOTORB outputs no power.
 Voltage Measurements
-Nodes	Voltage (V)	Notes
-A - B	2.9	Within tolerance
-OA - OB	0	Critical issue
-VCC - OA	5	Power supply functional
-OA - GND	6	Too high (DS: <0.25V)
-OB - GND	3	Exceeds spec (DS: <0.25V)
+  Nodes	Voltage (V)	Notes
+  A - B	2.9	Within tolerance
+  OA - OB	0	Critical issue
+  VCC - OA	5	Power supply functional
+  OA - GND	6	Too high (DS: <0.25V)
+  OB - GND	3	Exceeds spec (DS: <0.25V)
 Debug Steps
 1. Power Supply Adjustment:
     * Switched Jetson Nano’s power supply to match the PCB’s source (SY8205).
