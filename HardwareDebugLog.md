@@ -17,6 +17,7 @@ Hrdware Debug Log: Motor Driver & Power Supply Issues
   - **Observed**: MOTORB outputs no power.
 
 - **Voltage Measurements**
+
 | Nodes       | Voltage (V) | Notes                        |
 |-------------|-------------|------------------------------|
 | A - B       | 2.9         | Within tolerance             |
@@ -55,9 +56,11 @@ Hrdware Debug Log: Motor Driver & Power Supply Issues
 ## Issue 5: L9110s Voltage Anomaly
 - **Description**:
   Abnormal voltage observed on the input pins of the L9110s motor driver module:
-| + | - | voltage |
-| A1 | GND | 4.4 V |
-| A2 | GND | 4.4 V |
+
+| +  | -   | voltage |
+| A1 | GND | 4.4 V   |
+| A2 | GND | 4.4 V   |
+
 - **Hypothesis**:
 The input pins are connected to VCC through pull-up resistors, setting them to a "high" logic state by default. This keeps the motor driver module in a "brake" state until a "low" signal is applied to drive the motors.
 - **Action**:
