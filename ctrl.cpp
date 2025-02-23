@@ -7,11 +7,11 @@
 using namespace std;
 
 // 定义GPIO引脚
-const int MOTOR_A1 = 17;  // 电机A1控制引脚
-const int MOTOR_A2 = 18;  // 电机A2控制引脚
-const int MOTOR_B1 = 27;  // 电机B1控制引脚
-const int MOTOR_B2 = 22;  // 电机B2控制引脚
-const int SERVO_PIN = 23; // 舵机控制引脚
+const int MOTOR_A1 = 10;  // 电机A1控制引脚
+const int MOTOR_A2 = 13;  // 电机A2控制引脚
+const int MOTOR_B1 = 19;  // 电机B1控制引脚
+const int MOTOR_B2 = 26;  // 电机B2控制引脚
+const int SERVO_PIN = 27; // 舵机控制引脚
 
 // 初始化GPIO
 gpiod_chip* chip;
@@ -47,10 +47,10 @@ void setup() {
 void setMotorSpeed(gpiod_line* motor1, gpiod_line* motor2, int speed) {
     if (speed > 0) {
         gpiod_line_set_value(motor1, 1);
-        gpiod_line_set_value(motor2, 0);
-    } else if (speed < 0) {
-        gpiod_line_set_value(motor1, 0);
         gpiod_line_set_value(motor2, 1);
+    } else if (speed < 0) {
+        gpiod_line_set_value(motor1, -1);
+        gpiod_line_set_value(motor2, -1);
     } else {
         gpiod_line_set_value(motor1, 0);
         gpiod_line_set_value(motor2, 0);

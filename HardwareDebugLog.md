@@ -35,3 +35,32 @@ Hrdware Debug Log: Motor Driver & Power Supply Issues
 2. **Root Cause Analysis**:
    - SY8205 inefficiency likely triggered U-Boot’s protection mechanism due to unstable voltage.
    - **Solution**: Connected both power bank and battery GNDs. System stabilized, motor functioned normally.
+
+---
+
+## Issue 3: Network Connectivity Issue
+- **Description**:
+  The device is inaccessible via network, and the `ping` command returns "Host is down."
+- **Hypothesis**:
+  The network interface may be temporarily unavailable due to electrostatic discharge (ESD) or power-related issues.
+- **Action**:
+  Attempted to ground the power pin to release ESD. After waiting for 2 minutes, the network connection was restored.
+
+## Issue 4: GPIO Control Failure
+- **Description**:
+  The control program failed to run. GDB analysis revealed that `gpiod_chip_open /dev/gpiochip0` failed, returning `0x0`.
+- **Hypothesis**:
+  The issue might be caused by incorrect file permissions for `/dev/gpiochip0`.
+- **Action**:
+  Checked the permissions of `/dev/gpiochip0` and found it was set to `crw-------` (only accessible by root). Used `sudo chmod 666 /dev/gpiochip0` to modify the permissions, after which the program ran successfully.
+
+## Issue 5: L9110s Voltage Anomaly
+- **Description**:
+  Abnormal voltage observed on the input pins of the L9110s motor driver module:
+| + | - | voltage |
+| A1 | GND | 4.4 V |
+| A2 | GND | 4.4 V |
+- **Hypothesis**:
+The input pins are connected to VCC through pull-up resistors, setting them to a "high" logic state by default. This keeps the motor driver module in a "brake" state until a "low" signal is applied to drive the motors.
+- **Action**:
+Verified the circuit design to ensure the input signals can correctly control the motor driver module's state.
