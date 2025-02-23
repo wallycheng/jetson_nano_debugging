@@ -58,6 +58,7 @@ Hrdware Debug Log: Motor Driver & Power Supply Issues
   Abnormal voltage observed on the input pins of the L9110s motor driver module:
 
 | +  | -   | voltage |
+|----|-----|---------|
 | A1 | GND | 4.4 V   |
 | A2 | GND | 4.4 V   |
 
