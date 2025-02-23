@@ -16,7 +16,7 @@ Hrdware Debug Log: Motor Driver & Power Supply Issues
   - **Expected**: MOTORB should drive wheels.
   - **Observed**: MOTORB outputs no power.
 
-### Voltage Measurements
+- **Voltage Measurements**
 | Nodes       | Voltage (V) | Notes                        |
 |-------------|-------------|------------------------------|
 | A - B       | 2.9         | Within tolerance             |
@@ -25,9 +25,7 @@ Hrdware Debug Log: Motor Driver & Power Supply Issues
 | OA - GND    | 6           | Too high (DS: <0.25V)        |
 | OB - GND    | 3           | Exceeds spec (DS: <0.25V)    |
 
----
-
-## Debug Steps
+- **Debug Steps**
 1. **Power Supply Adjustment**:
    - Switched Jetson Nano’s power supply to match the PCB’s source (SY8205).
    - **Result**: Motor spun briefly (~1s), then Nano shut down. Repeated attempts yielded identical behavior.
