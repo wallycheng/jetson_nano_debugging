@@ -66,3 +66,33 @@ Hrdware Debug Log: Motor Driver & Power Supply Issues
 The input pins are connected to VCC through pull-up resistors, setting them to a "high" logic state by default. This keeps the motor driver module in a "brake" state until a "low" signal is applied to drive the motors.
 - **Action**:
 Verified the circuit design to ensure the input signals can correctly control the motor driver module's state.
+
+## Issue 5: Gpio-pins didn't work
+
+- **Description**
+  Fail to set  status to gpio-pin "10 13 19 26 27" on the carrier board with **gpiod**. The pin voltage measurement data didn't match expections.
+
+  Steps to Reproduce:
+
+```cpp
+const int aim_pin = 10; // trying to twiddle pin 10 on the carrier board
+gpio_line* aim_line = gpiod_chip_get_line(opened_chip, aim_pin); // trying to get line by pin name, what is wrong  
+```
+
+- **Hypothesis**:
+  Not sure if there are any perrequisite steps required before using the GPIO pins on the Jetson Nano, or if the carrier board pin numbers do not match the CPU-side line numbers.
+
+- **Debug Steps**:
+1. gpioinfo > tmp0
+
+2. run ctrl
+
+3. gpioinfo > tmp1
+
+4. diff tmp0 tmp1
+
+5. As shown in the printed output, I triggered the wrong line actually:
+| line 10 after.  | before |
+|-----------------|--------|
+| line  10:      unnamed       unused  output  active-high   | line  10:      unnamed       unused   input  active-high  |
+  There is a [chat](https://jetsonhacks.com/nvidia-jetson-nano-j41-header-pinout/) shown gpio pinout on the borad.

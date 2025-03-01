@@ -7,7 +7,8 @@
 using namespace std;
 
 // 定义GPIO引脚
-const int MOTOR_A1 = 10;  // 电机A1控制引脚
+const int MOTOR_A1_1 = 10;  // 电机A1控制引脚1
+const int MOTOR_A1_2 = 11;  // 电机A1控制引脚2
 const int MOTOR_A2 = 13;  // 电机A2控制引脚
 const int MOTOR_B1 = 19;  // 电机B1控制引脚
 const int MOTOR_B2 = 26;  // 电机B2控制引脚
@@ -15,7 +16,8 @@ const int SERVO_PIN = 27; // 舵机控制引脚
 
 // 初始化GPIO
 gpiod_chip* chip;
-gpiod_line* motorA1;
+gpiod_line* motorA1_1;
+gpiod_line* motorA1_2;
 gpiod_line* motorA2;
 gpiod_line* motorB1;
 gpiod_line* motorB2;
@@ -30,30 +32,35 @@ void setup() {
     }
 
     // 获取GPIO线
-    motorA1 = gpiod_chip_get_line(chip, MOTOR_A1);
+    motorA1_1 = gpiod_chip_get_line(chip, MOTOR_A1_1);
+    motorA1_2 = gpiod_chip_get_line(chip, MOTOR_A1_2);
     motorA2 = gpiod_chip_get_line(chip, MOTOR_A2);
     motorB1 = gpiod_chip_get_line(chip, MOTOR_B1);
     motorB2 = gpiod_chip_get_line(chip, MOTOR_B2);
     servo = gpiod_chip_get_line(chip, SERVO_PIN);
 
     // 设置GPIO线为输出
-    gpiod_line_request_output(motorA1, "motorA1", 0);
+    gpiod_line_request_output(motorA1_1, "motorA1_1", 0);
+    gpiod_line_request_output(motorA1_2, "motorA1_2", 0);
     gpiod_line_request_output(motorA2, "motorA2", 0);
     gpiod_line_request_output(motorB1, "motorB1", 0);
     gpiod_line_request_output(motorB2, "motorB2", 0);
     gpiod_line_request_output(servo, "servo", 0);
 }
 
+/*
+ * 1 is stop, 0 is run.
+ */
 void setMotorSpeed(gpiod_line* motor1, gpiod_line* motor2, int speed) {
     if (speed > 0) {
         gpiod_line_set_value(motor1, 1);
-        gpiod_line_set_value(motor2, 1);
-    } else if (speed < 0) {
-        gpiod_line_set_value(motor1, -1);
-        gpiod_line_set_value(motor2, -1);
-    } else {
-        gpiod_line_set_value(motor1, 0);
         gpiod_line_set_value(motor2, 0);
+    } else if (speed < 0) {
+        gpiod_line_set_value(motor1, 0);
+        gpiod_line_set_value(motor2, 1);
+    } else {
+        gpiod_line_set_value(motor1, 1);
+        gpiod_line_set_value(motor2, 1);
     }
 }
 
@@ -69,7 +76,8 @@ void setServoAngle(int angle) {
 
 void cleanup() {
     // 释放GPIO线
-    gpiod_line_release(motorA1);
+    gpiod_line_release(motorA1_1);
+    gpiod_line_release(motorA1_2);
     gpiod_line_release(motorA2);
     gpiod_line_release(motorB1);
     gpiod_line_release(motorB2);
@@ -83,7 +91,7 @@ int main() {
     setup();
 
     // 控制小车前进
-    setMotorSpeed(motorA1, motorA2, 1);  // 电机A正转
+    setMotorSpeed(motorA1_1, motorA1_2, 1);  // 电机A正转
     setMotorSpeed(motorB1, motorB2, 1);  // 电机B正转
     std::this_thread::sleep_for(std::chrono::seconds(2));
 
