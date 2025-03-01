@@ -1,2 +1,2 @@
 # Index
- * [hardware issues debugging when I work with jetson nano](HardwareDebugLog.md)
+ * [hardware issues debugging ](HardwareDebugLog.md)when I work with jetson nano
