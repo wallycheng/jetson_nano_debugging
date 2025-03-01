@@ -92,7 +92,9 @@ gpio_line* aim_line = gpiod_chip_get_line(opened_chip, aim_pin); // trying to ge
 4. diff tmp0 tmp1
 
 5. As shown in the printed output, I triggered the wrong line actually:
-| line 10 after.  | before |
-|-----------------|--------|
+
+| line 10 after.                                             | before                                                    |
+|------------------------------------------------------------|-----------------------------------------------------------|
 | line  10:      unnamed       unused  output  active-high   | line  10:      unnamed       unused   input  active-high  |
+
   There is a [chat](https://jetsonhacks.com/nvidia-jetson-nano-j41-header-pinout/) shown gpio pinout on the borad.
