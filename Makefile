@@ -2,7 +2,7 @@
 CXX = g++
 
 # 编译选项
-CXXFLAGS = -Wall -Wextra -std=c++11 -g -O0
+CXXFLAGS = -Wall -Wextra -std=c++11 -g -O0 -fpermissive
 
 # 链接选项
 LDFLAGS = -lgpiod
@@ -24,7 +24,7 @@ all: $(TARGET)
 
 # 生成目标二进制文件
 $(TARGET): $(OBJS)
-	$(CXX) $(CXXFLAGS) -o $@ $^ $(LDFLAGS)
+	$(CXX) -o $@ $^ $(LDFLAGS) $(CXXFLAGS)
 
 # 编译 .cpp 文件为 .o 文件
 %.o: %.cpp
@@ -36,3 +36,4 @@ clean:
 
 # 伪目标
 .PHONY: all clean
+
